@@ -7,19 +7,14 @@ package com.cangjie.lnt.model;
 
 import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 
 /**
  *
  * @author lenovo
  */
-@Entity
-@Table(name = "test_bean")
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 public class TestBean implements Serializable {
     @Id
     private String id;

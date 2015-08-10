@@ -17,6 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="test_bean_sub")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class TestBeanSub extends TestBean{
     @Column(name="test")
     private String test;

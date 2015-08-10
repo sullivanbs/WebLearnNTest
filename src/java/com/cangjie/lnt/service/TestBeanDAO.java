@@ -5,19 +5,32 @@
  */
 package com.cangjie.lnt.service;
 
-import com.cangjie.util.HibernateUtil;
-import org.hibernate.Query;
-import org.hibernate.Session;
+import com.cangjie.lnt.model.TestBean;
+import com.cangjie.lnt.model.TestBeanSub;
+import java.util.Iterator;
+import java.util.List;
+import javax.annotation.Resource;
+import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author lenovo
  */
+@Component
 public class TestBeanDAO {
+    @Resource
+    private HibernateTemplate ht;
     
-    public static void queryAll(String clazz){
+    public void queryAll(String clazz){
         String hql = "from " + clazz ;
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Query query = session.createQuery("select u.userName from TRegister u");
+        List beanlist = ht.find(hql);
+        for (Iterator it = beanlist.iterator(); it.hasNext();) {
+            Object bean = it.next();
+            if(bean instanceof TestBeanSub)
+                System.out.println(((TestBeanSub) bean).getTest());
+            else
+                System.out.println("this is not a bean of TestBeanSub:" + ((TestBean) bean).getId());
+        }
     }
 }
